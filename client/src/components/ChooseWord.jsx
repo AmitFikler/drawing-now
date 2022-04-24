@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { wordList } from '../helpers/wordList';
 
-function ChooseWord() {
-  const [word, setWord] = useState('');
+function ChooseWord({ word, setWord, socket }) {
+  const navigate = useNavigate(); // hook for navigating to a new page
   const [easy, setEasy] = useState('');
   const [medium, setMedium] = useState('');
   const [hard, setHard] = useState('');
@@ -18,9 +19,12 @@ function ChooseWord() {
     return wordlist[randomIndex];
   };
 
-  const handleStartDrawing = (e) => {
+  const handleChooseWord = (e) => {
     if (word === '') {
       alert('Please choose a word');
+    } else {
+      socket.emit('chooseAWord', word);
+      navigate('/draw');
     }
   };
 
@@ -42,7 +46,7 @@ function ChooseWord() {
 
         <h2>{word}</h2>
 
-        <button onClick={handleStartDrawing}>Start Drawing :)</button>
+        <button onClick={handleChooseWord}>Start Drawing :)</button>
       </div>
     </>
   );

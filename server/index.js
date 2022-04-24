@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3003;
 const httpServer = createServer(app);
 const io = new Server(httpServer);
-
+let ChosenWord = ''; //
 const players = [];
 
 io.on('connection', (socket) => {
@@ -23,6 +23,10 @@ io.on('connection', (socket) => {
     if (players.length === 2) {
       socket.emit('startGame');
     }
+  });
+
+  socket.on('chooseAWord', (word) => {
+    ChosenWord = word;
   });
 });
 
