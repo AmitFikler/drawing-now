@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function WelcomePage({ socket }) {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
+  const [waiting, setWaiting] = useState(false);
 
   const handleSubmit = () => {
     setName('');
@@ -13,12 +16,16 @@ function WelcomePage({ socket }) {
     console.log('Invalid name');
   });
 
-  socket.on('wait', () => {
-    console.log('Waiting for other player');
+  socket.on('waitForAPlayer', () => {
+    setWaiting(true);
   });
 
-  socket.on('startGame', () => {
-    console.log('Game started');
+  socket.on('startDraw', () => {
+    navigate('/choose');
+  });
+  socket.on('waitingRoom', () => {
+    console.log('wait');
+    navigate('/waitingRoom');
   });
 
   return (
@@ -32,6 +39,7 @@ function WelcomePage({ socket }) {
         value={name}
       />
       <button onClick={handleSubmit}>Enter</button>
+      {waiting && <h2>Waiting for other player..</h2>}
     </>
   );
 }
