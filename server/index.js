@@ -10,7 +10,7 @@ const io = new Server(httpServer);
 const players = [];
 
 io.on('connection', (socket) => {
-  socket.on('playerJoin', ({ name }) => {
+  socket.on('playerJoin', (name) => {
     if (players.includes(name)) {
       socket.emit('invalidName');
     } else {
