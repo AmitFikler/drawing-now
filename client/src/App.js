@@ -6,6 +6,7 @@ import Draw from './components/Draw';
 import { io } from 'socket.io-client';
 
 import { useState } from 'react';
+import WaitingRoom from './components/WaitingRoom';
 function App() {
   const [word, setWord] = useState('');
   const socket = io('http://localhost:3003');
@@ -21,8 +22,11 @@ function App() {
             }
           />
           <Route path='/draw' element={<Draw word={word} socket={socket} />} />
-          {/* <Route path='/guess' element={} />
-          <Route path='/wait' element={} /> */}
+          {/* <Route path='/guess' element={} /> */}
+          <Route
+            path='/waitingRoom'
+            element={<WaitingRoom socket={socket} />}
+          />
         </Routes>
       </Router>
     </div>
