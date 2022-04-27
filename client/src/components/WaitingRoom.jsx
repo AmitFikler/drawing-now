@@ -1,10 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-
-function WaitingRoom({ socket }) {
-  const navigate = useNavigate();
-  socket.on('guess', () => {
-    navigate('/choose');
-  });
+function WaitingRoom() {
   return (
     <>
       <div className='waiting-room'>

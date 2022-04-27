@@ -1,12 +1,10 @@
 import { useRef, useState } from 'react';
 import { Stage, Layer, Line } from 'react-konva';
-import { useNavigate } from 'react-router-dom';
 
 function CanvasComp({ color, socket }) {
   const [lines, setLines] = useState([]);
   const isDrawing = useRef(false);
   const stageRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleMouseDown = (e) => {
     isDrawing.current = true;
@@ -35,11 +33,13 @@ function CanvasComp({ color, socket }) {
   };
 
   const handleSend = () => {
-    const url = stageRef.current.toDataURL();
-    socket.emit('sendDraw', url);
-    navigate('/waitingRoom');
+    const uri = stageRef.current.toDataURL();
+    socket.emit('sendDraw', { uri });
   };
 
+  // socket.on('waitingRoom', () => {
+  //   navigate('/waitingRoom');
+  // });
   return (
     <div>
       <Stage
