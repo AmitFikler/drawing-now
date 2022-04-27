@@ -75,9 +75,9 @@ io.on('connection', (socket) => {
   });
 });
 
-app.use(express.static(path.resolve(__dirname, './client/build')));
+app.use(express.static(path.resolve(__dirname, './build')));
 app.get('*', function (request, response) {
-  response.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+  response.sendFile(path.resolve(__dirname, './build', 'index.html'));
 });
 //deploy
 
