@@ -33,3 +33,6 @@ Draw:
 
 Guess:
 ![welcome](/screenshots/guess.png)
+
+Waiting:
+![waiting](/screenshots/waiting.png)
