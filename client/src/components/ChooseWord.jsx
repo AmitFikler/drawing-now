@@ -10,6 +10,7 @@ function ChooseWord({ word, setWord, socket }) {
   const [hard, setHard] = useState('');
 
   useEffect(() => {
+    setWord('');
     setEasy(getRandomWord(wordList.easy));
     setMedium(getRandomWord(wordList.medium));
     setHard(getRandomWord(wordList.hard));
