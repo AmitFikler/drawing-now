@@ -8,6 +8,9 @@ import { io } from 'socket.io-client';
 import { useState } from 'react';
 import WaitingRoom from './components/WaitingRoom';
 import GuessRoom from './components/GuessRoom';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const [word, setWord] = useState({ word: '', score: 1 });
   const [waiting, setWaiting] = useState(false);
