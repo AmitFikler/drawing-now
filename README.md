@@ -25,8 +25,6 @@ _I used [Konva](https://konvajs.org/) library to paint_
 Welcome:
 ![welcome](/screenshots/welcome.png)
 
-Choose:
-![welcome](/screenshots/choose.png)
 
 Draw:
 ![welcome](/screenshots/draw.png)
