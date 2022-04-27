@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { io } from 'socket.io-client';
+import '../style/welcome.css';
 
-function WelcomePage({ socket, waiting, setImg, setHiddenWord, setWaiting }) {
+function WelcomePage({
+  socket,
+  waiting,
+  setImg,
+  setHiddenWord,
+  setWaiting,
+  setScore,
+}) {
   const navigate = useNavigate();
   const [name, setName] = useState('');
-  // const [waiting, setWaiting] = useState(false);
 
   const handleSubmit = () => {
     setName('');
@@ -36,11 +42,14 @@ function WelcomePage({ socket, waiting, setImg, setHiddenWord, setWaiting }) {
         setImg(drawingUri);
         setHiddenWord(chosenWord);
       });
+      socket.on('correctAnswer', ({ score }) => {
+        setScore(score);
+      });
     }
   }, [socket]);
 
   return (
-    <>
+    <div className='welcome'>
       <h1>Welcome to DRAWING_NOW</h1>
       <h4>Please Enter a username:</h4>
       <input
@@ -51,7 +60,7 @@ function WelcomePage({ socket, waiting, setImg, setHiddenWord, setWaiting }) {
       />
       <button onClick={handleSubmit}>Enter</button>
       {waiting && <h2>Waiting for other player..</h2>}
-    </>
+    </div>
   );
 }
 

@@ -63,8 +63,10 @@ function CanvasComp({ color, socket }) {
           ))}
         </Layer>
       </Stage>
-      <button onClick={() => setLines([])}>Clear</button>
-      <button onClick={handleSend}>Send</button>
+      <div className='btns'>
+        <button onClick={() => setLines([])}>Clear</button>
+        <button onClick={handleSend}>Send</button>
+      </div>
     </div>
   );
 }
