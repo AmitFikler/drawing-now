@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react';
 import { Stage, Layer, Line } from 'react-konva';
 
-function CanvasComp({ color, socket }) {
+function CanvasComp({ socket }) {
   const [lines, setLines] = useState([]);
+  const [color, setColor] = useState('black');
+
   const isDrawing = useRef(false);
   const stageRef = useRef(null);
 
@@ -41,7 +43,15 @@ function CanvasComp({ color, socket }) {
   //   navigate('/waitingRoom');
   // });
   return (
-    <div>
+    <div className='canvas-div'>
+      <span className='input-span'>
+        Change your color:{' '}
+        <input
+          className='inputColor'
+          type={'color'}
+          onChange={(e) => setColor(e.target.value)}
+        />
+      </span>
       <Stage
         ref={stageRef}
         className='canvas-stage'

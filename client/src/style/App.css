@@ -22,7 +22,7 @@ button {
   font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
   border-radius: 6px;
   border: none;
-
+  cursor: pointer;
   color: #fff;
   background: linear-gradient(180deg, #73aafb 0%, #367AF6 100%);
    background-origin: border-box;
@@ -30,6 +30,10 @@ button {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+}
+
+button:hover {
+  background: linear-gradient(180deg, #85b5fc 0%, #1261f5 100%);
 }
 
 button:focus {
