@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import '../style/welcome.css';
 
 function WelcomePage({
@@ -35,7 +36,6 @@ function WelcomePage({
         navigate('/waitingRoom');
       });
       socket.on('startGuess', (param) => {
-        console.log(param);
         navigate('/guess');
       });
       socket.on('getDrawFromServer', ({ drawingUri, chosenWord }) => {
@@ -43,10 +43,19 @@ function WelcomePage({
         setHiddenWord(chosenWord);
       });
       socket.on('correctAnswer', ({ score }) => {
-        setScore(score);
+        if (score) {
+          // toast.success('The player guessed right!');
+          setScore(score);
+        }
       });
     }
-  }, [socket]);
+
+    socket.on('userDisconnect', () => {
+      setScore(0);
+      setWaiting(false);
+      navigate('/');
+    });
+  }, []);
 
   return (
     <div className='welcome'>
