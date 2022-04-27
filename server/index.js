@@ -12,12 +12,13 @@ const io = new Server(httpServer, {
     origin: '*',
   },
 });
-let ChosenWord = '';
-let drawing = '';
+let chosenWord = {};
+let drawingUri = '';
 const players = [];
+let nowPlaying = 0;
 
 io.on('connection', (socket) => {
-  socket.on('playerJoin', (name) => {
+  socket.on('playerJoin', ({ name }) => {
     if (players.includes(name) || !name) {
       socket.emit('invalidName');
     } else {
@@ -33,13 +34,36 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('chooseAWord', (word) => {
-    ChosenWord = word;
+  socket.on('chooseAWord', ({ word, score }) => {
+    chosenWord = { word, score };
   });
 
-  socket.on('sendDraw', (uri) => {
-    drawing = uri;
+  socket.on('sendDraw', ({ uri }) => {
+    drawingUri = uri;
+
+    if (nowPlaying === 0) {
+      io.to(players[1].id).emit('startGuess');
+      io.to(players[0].id).emit('waitingRoom');
+      nowPlaying = 1;
+    } else {
+      io.to(players[0].id).emit('startGuess');
+      io.to(players[1].id).emit('waitingRoom');
+      nowPlaying = 0;
+    }
   });
+
+  socket.on('getDraw', () => {
+    io.to(players[nowPlaying].id).emit('getDrawFromServer', {
+      drawingUri,
+      chosenWord,
+    });
+  });
+  // socket.on('guessCorrect', () => {
+  //   score += chosenWord.score;
+  //   socket.to(players[playingPlayer ? 0 : 1].id).emit('correctAnswer', {
+  //     score,
+  //   });
+  // });
 });
 
 httpServer.listen(PORT, () => {
