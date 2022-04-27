@@ -25,7 +25,6 @@ function ChooseWord({ word, setWord, socket }) {
       alert('Please choose a word');
     } else {
       socket.emit('chooseAWord', word);
-      setWord('');
       navigate('/draw');
     }
   };

@@ -39,9 +39,6 @@ function CanvasComp({ socket }) {
     socket.emit('sendDraw', { uri });
   };
 
-  // socket.on('waitingRoom', () => {
-  //   navigate('/waitingRoom');
-  // });
   return (
     <div className='canvas-div'>
       <span className='input-span'>

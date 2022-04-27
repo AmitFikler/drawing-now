@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import '../style/guess.css';
 
 function GuessRoom({ socket, hiddenWord, img }) {
   const [guess, setGuess] = useState('');
@@ -21,15 +22,19 @@ function GuessRoom({ socket, hiddenWord, img }) {
   };
 
   return (
-    <>
-      <img src={img} alt='guess' />
-      <input
-        type={'text'}
-        value={guess}
-        onChange={(e) => setGuess(e.target.value)}
-      />
-      <button onClick={handleGuess}>Send</button>
-    </>
+    <div className='guess-page'>
+      <img className='get-draw' src={img} alt='guess' />
+      <div className='guessing'>
+        <input
+          type={'text'}
+          value={guess}
+          onChange={(e) => setGuess(e.target.value)}
+        />
+        <button className='btn-guess' onClick={handleGuess}>
+          Send
+        </button>
+      </div>
+    </div>
   );
 }
 
