@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function GuessRoom({ socket, hiddenWord, img }) {
   const [guess, setGuess] = useState('');
@@ -10,11 +11,11 @@ function GuessRoom({ socket, hiddenWord, img }) {
   }, []);
 
   const handleGuess = () => {
-    console.log(hiddenWord.word);
     if (guess.toLowerCase() === hiddenWord.word.toLowerCase()) {
-      console.log('trueeee');
       socket.emit('guessCorrect');
       navigate('/choose');
+    } else {
+      toast.error('Wrong guess!');
     }
     setGuess('');
   };
