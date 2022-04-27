@@ -17,7 +17,7 @@ function App() {
   const [hiddenWord, setHiddenWord] = useState('');
   const [score, setScore] = useState(0);
   const [img, setImg] = useState('');
-  const socket = io('http://localhost:3003');
+  const socket = io('https://drawingnow.herokuapp.com/');
 
   return (
     <Router>
