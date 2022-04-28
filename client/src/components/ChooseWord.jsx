@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { wordList } from '../helpers/wordList';
+import { toast } from 'react-toastify';
+
 import '../style/choose.css';
 
 function ChooseWord({ word, setWord, socket }) {
@@ -23,7 +25,7 @@ function ChooseWord({ word, setWord, socket }) {
 
   const handleChooseWord = (e) => {
     if (word === '') {
-      alert('Please choose a word');
+      toast.error('Please choose a word');
     } else {
       socket.emit('chooseAWord', word);
       navigate('/draw');
